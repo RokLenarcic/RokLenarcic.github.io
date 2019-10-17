@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="http://blogawesome.com/" rel="self" type="application/rss+xml"/><title>Rok's Programming Blog</title><link>http://blogawesome.com/</link><description>The thoughts of one developer on Clojure and programming</description><lastBuildDate>Thu, 17 Oct 2019 17:46:24 +0200</lastBuildDate><generator>clj-rss</generator><item><guid>http://blogawesome.com/posts-output/2019-10-15-clojure-style-guide</guid><link>http://blogawesome.com/posts-output/2019-10-15-clojure-style-guide</link><title>The "Clojure Style Guide" is simply Wrong</title><description>&lt;div class="sect1"&gt;
+&lt;h2 id="_the_guide_itself"&gt;The Guide itself&lt;/h2&gt;
+&lt;div class="sectionbody"&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;What is the "Clojure Style Guide"?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;It can be found here:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;&lt;a href="https://github.com/bbatsov/clojure-style-guide"&gt;Clojure Style Guide&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;It&amp;#8217;s a style guide for Clojure that was created by a man who wrote some of the
+widely used tooling in Clojure, but primarily he&amp;#8217;s a Ruby developer and the author of
+ Rubocop, the most popular Ruby linter.&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="sect1"&gt;
+&lt;h2 id="_why_this_topic"&gt;Why this topic?&lt;/h2&gt;
+&lt;div class="sectionbody"&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;The reason for this post is that other people have been
+clobbering me over the head with this
+style guide over and over again:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;&lt;strong&gt;"But the Clojure Style Guide guide says blah blah blah&amp;#8230;&amp;#8203;"&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;This is very upsetting, because I don&amp;#8217;t think there&amp;#8217;s ever been an agreement
+about the Clojure style, yet this one document made by this one
+person somehow became the golden standard.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;There was no examination of what is suggested, it was all just accepted.
+It&amp;#8217;s even named &lt;strong&gt;Clojure Style Guide&lt;/strong&gt; like it&amp;#8217;s an official thing,
+ an ISO standard or a RFC and not just an opinion of one person.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;I&amp;#8217;ll go into detail why I reject it.&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="sect1"&gt;
+&lt;h2 id="_single_space_indentation"&gt;Single Space Indentation&lt;/h2&gt;
+&lt;div class="sectionbody"&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;&lt;a href="https://github.com/bbatsov/clojure-style-guide#arguments-indentation"&gt;The Section in the guide&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;This man wants us to ident function arguments with a single space.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;I reject this notion because:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="sect2"&gt;
+&lt;h3 id="_incongruent_with_basic_semantics_of_any_language_or_markdown"&gt;Incongruent with basic semantics of any language or markdown&lt;/h3&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;Let&amp;#8217;s say you have a YAML file and you want to represent an ordered sequence.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;It looks like this (as per YAML 1.2):&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="listingblock"&gt;
+&lt;div class="content"&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;color_list:
+   - red
+   - blue
+   - green&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;&lt;strong&gt;All the items start on same vertical column.&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;The formatting is aligned with the semantics of this piece of YAML. It&amp;#8217;s a data structure.
+It&amp;#8217;s a list of items, which have equal standing as far as this list is concerned. The items
+are &lt;em&gt;independent&lt;/em&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;That is why when describing lists, vectors et al. we align all the items to start at
+the same column.
+&lt;br&gt;
+&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;&lt;strong&gt;The same goes for vector literal in clojure:&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="listingblock"&gt;
+&lt;div class="content"&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-clojure" data-lang="clojure"&gt;[:red
+ :blue
+ :green]&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;In this case, the single space indentation for second and third item is there to offset the opening
+bracket and the effect it achieves is columnar aligment of the items. This is fine and it&amp;#8217;s
+completely sensible, since it&amp;#8217;s a vector of &lt;em&gt;independent&lt;/em&gt; and &lt;em&gt;equal&lt;/em&gt; elements.
+&lt;br&gt;
+&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;Clojure Style Guide suggests the same formatting for &lt;em&gt;function calls&lt;/em&gt; or &lt;em&gt;operations&lt;/em&gt;
+instead of just vectors. This is where this thing goes off the rails:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="listingblock"&gt;
+&lt;div class="content"&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-clojure" data-lang="clojure"&gt;(operation
+ arg1
+ arg2
+ arg3)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;This is simply wrong. &lt;strong&gt;It pretends that the first element of the list, the operation,
+does not have a special semantic, when it clearly does!&lt;/strong&gt;
+&lt;br&gt;
+&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;The first element of the list is special, it&amp;#8217;s the operation or function.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="olist arabic"&gt;
+&lt;ol class="arabic"&gt;
+&lt;li&gt;
+&lt;p&gt;Lisp-2 languages like Common Lisp will even have a separate symbol space
+for the function&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Common Lisp is not formatted like this&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;As we will see, even this style guide itself offers a different formatting for many
+operations (macros)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;It is simply not an ordered list of data elements&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;hr&gt;
+&lt;/div&gt;
+&lt;div class="sect2"&gt;
+&lt;h3 id="_not_easily_enforced"&gt;Not easily enforced&lt;/h3&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;Prior argument would be reason enough not to use this formatting scheme, but to make things worse,
+there are many many exceptions to this rule special forms like &lt;code&gt;if&lt;/code&gt;, any control macro, any binding
+macro etc&amp;#8230;&amp;#8203; but not all macros.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;It&amp;#8217;s practically impossible to create an automatic formatter that would follow
+this code style because you&amp;#8217;d need a database of third party macros and their correct formatting.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;This is ironic given that the author is an author of a linter.&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr&gt;
+&lt;/div&gt;
+&lt;div class="sect2"&gt;
+&lt;h3 id="_prior_art_it_s_the_scheme_style"&gt;Prior art - it&amp;#8217;s the Scheme style&lt;/h3&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;The question might arise: what about other older Lisps?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="olist arabic"&gt;
+&lt;ol class="arabic"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://lisp-lang.org/style-guide/"&gt;lisp-lang.org style guide&lt;/a&gt; says 2 space ident&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://community.schemewiki.org/?scheme-style"&gt;schemewiki style guide&lt;/a&gt; says 1 space ident&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;This other Scheme related style &lt;a href="http://mumble.net/~campbell/scheme/style.txt"&gt;document&lt;/a&gt; provides
+the following rationale:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="literalblock"&gt;
+&lt;div class="content"&gt;
+&lt;pre&gt;Rationale:  The columnar alignment allows the reader to follow the
+  operands of any operation straightforwardly, simply by scanning
+  downward or upward to match a common column.  Indentation dictates
+  structure; confusing indentation is a burden on the reader who wishes
+  to derive structure without matching parentheses manually.&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;I don&amp;#8217;t think that one additional space of indentation weakens visual vertical
+scanning, because the difference is too small for the argument to have some other
+symbol above it to confuse the issue or to make parenthesis confusing.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;This argument is especially suspect since we know that there exist forms with 2 space
+indentation in the same standard.&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr&gt;
+&lt;hr&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;And for the second rule I don&amp;#8217;t agree with:&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="sect1"&gt;
+&lt;h2 id="_80_character_line_limit"&gt;80 character line limit&lt;/h2&gt;
+&lt;div class="sectionbody"&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;This archaic rule is a throwback to the 70s with the 80 column terminals, and yet here we are,
+40 years later, with 4k screens, still having to adhere to the same principles C programmers did
+before desktop programming was even a thing.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;Let&amp;#8217;s examine the failings of this rule and the reasons behind it.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="sect2"&gt;
+&lt;h3 id="_lisp_needs_more_horizontal_budget"&gt;Lisp needs more horizontal budget&lt;/h3&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;Programming Lisp with an 80 character budget is like programming C with a 60 character budget.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;There are commonly used constructs that don&amp;#8217;t increase level of indentation in Algol languages
+like C, but it does in Lisp, most obvious is &lt;code&gt;introducing a local variable&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;In C it would be simply:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="listingblock"&gt;
+&lt;div class="content"&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-C" data-lang="C"&gt;int i = 0;
+i = i + 1;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;No additional indentation was introduced. Here&amp;#8217;s Clojure:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="listingblock"&gt;
+&lt;div class="content"&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-clojure" data-lang="clojure"&gt;(let [i 0]
+  (inc i))&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;A &lt;code&gt;let&lt;/code&gt; statement increases indentation.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="sect2"&gt;
+&lt;h3 id="_clojure_s_standard_ways_of_dealing_with_deep_nesting_are_tricky"&gt;Clojure&amp;#8217;s standard ways of dealing with deep nesting are tricky&lt;/h3&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;So what does one do when you reach the 80 column limit?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;One way is to break the line. The established formatting rules make it so this really
+doesn&amp;#8217;t free up much space.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;Another approach is to factor out the nested expressions into functions.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;This has severe shortcomings.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="ulist"&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;it severely pollutes namespace public symbol pool with functions used
+only at one call-site,
+and naming these functions is generally impossible unless you use really long function names
+that all but ruin any space benefit to using them.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description><pubDate>Tue, 15 Oct 2019 00:00:00 +0200</pubDate></item></channel></rss>
