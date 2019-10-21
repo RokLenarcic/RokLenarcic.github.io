@@ -2,7 +2,7 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url>
 <loc>
-http://blogawesome.com/authors-output/Rok Lenarčič.html
+https://roklenarcic.github.io/authors-output/Rok Lenarčič.html
 </loc>
 <lastmod>
 2019-10-21
@@ -10,7 +10,7 @@ http://blogawesome.com/authors-output/Rok Lenarčič.html
 </url>
 <url>
 <loc>
-http://blogawesome.com/tags.html
+https://roklenarcic.github.io/tags.html
 </loc>
 <lastmod>
 2019-10-21
@@ -18,7 +18,7 @@ http://blogawesome.com/tags.html
 </url>
 <url>
 <loc>
-http://blogawesome.com/index.html
+https://roklenarcic.github.io/index.html
 </loc>
 <lastmod>
 2019-10-21
@@ -26,7 +26,7 @@ http://blogawesome.com/index.html
 </url>
 <url>
 <loc>
-http://blogawesome.com/404.html
+https://roklenarcic.github.io/404.html
 </loc>
 <lastmod>
 2019-10-21
@@ -34,7 +34,7 @@ http://blogawesome.com/404.html
 </url>
 <url>
 <loc>
-http://blogawesome.com/pages-output/about.html
+https://roklenarcic.github.io/pages-output/about.html
 </loc>
 <lastmod>
 2019-10-21
@@ -42,7 +42,7 @@ http://blogawesome.com/pages-output/about.html
 </url>
 <url>
 <loc>
-http://blogawesome.com/tags-output/community politics.html
+https://roklenarcic.github.io/tags-output/community politics.html
 </loc>
 <lastmod>
 2019-10-21
@@ -50,7 +50,7 @@ http://blogawesome.com/tags-output/community politics.html
 </url>
 <url>
 <loc>
-http://blogawesome.com/tags-output/style.html
+https://roklenarcic.github.io/tags-output/style.html
 </loc>
 <lastmod>
 2019-10-21
@@ -58,7 +58,7 @@ http://blogawesome.com/tags-output/style.html
 </url>
 <url>
 <loc>
-http://blogawesome.com/tags-output/clojure.html
+https://roklenarcic.github.io/tags-output/clojure.html
 </loc>
 <lastmod>
 2019-10-21
@@ -66,7 +66,7 @@ http://blogawesome.com/tags-output/clojure.html
 </url>
 <url>
 <loc>
-http://blogawesome.com/posts-output/2019-10-15-clojure-style-guide.html
+https://roklenarcic.github.io/posts-output/2019-10-15-clojure-style-guide.html
 </loc>
 <lastmod>
 2019-10-21
@@ -74,7 +74,7 @@ http://blogawesome.com/posts-output/2019-10-15-clojure-style-guide.html
 </url>
 <url>
 <loc>
-http://blogawesome.com/archives.html
+https://roklenarcic.github.io/archives.html
 </loc>
 <lastmod>
 2019-10-21
