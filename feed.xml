@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="http://blogawesome.com/" rel="self" type="application/rss+xml"/><title>Rok's Programming Blog</title><link>http://blogawesome.com/</link><description>The thoughts of one developer on Clojure and programming</description><lastBuildDate>Thu, 17 Oct 2019 17:46:24 +0200</lastBuildDate><generator>clj-rss</generator><item><guid>http://blogawesome.com/posts-output/2019-10-15-clojure-style-guide</guid><link>http://blogawesome.com/posts-output/2019-10-15-clojure-style-guide</link><title>The "Clojure Style Guide" is simply Wrong</title><description>&lt;div class="sect1"&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="http://blogawesome.com/" rel="self" type="application/rss+xml"/><title>Rok's Programming Blog</title><link>http://blogawesome.com/</link><description>The thoughts of one developer on Clojure and programming</description><lastBuildDate>Mon, 21 Oct 2019 17:16:18 +0200</lastBuildDate><generator>clj-rss</generator><item><guid>http://blogawesome.com/posts-output/2019-10-15-clojure-style-guide</guid><link>http://blogawesome.com/posts-output/2019-10-15-clojure-style-guide</link><title>The "Clojure Style Guide" is simply Wrong</title><description>&lt;div class="sect1"&gt;
 &lt;h2 id="_the_guide_itself"&gt;The Guide itself&lt;/h2&gt;
 &lt;div class="sectionbody"&gt;
 &lt;div class="paragraph"&gt;
@@ -28,7 +28,7 @@ clobbering me over the head with this
 style guide over and over again:&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="paragraph"&gt;
-&lt;p&gt;&lt;strong&gt;"But the Clojure Style Guide guide says blah blah blah&amp;#8230;&amp;#8203;"&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;"But the Clojure Style Guide guide says this and that&amp;#8230;&amp;#8203;"&lt;/strong&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;hr&gt;
 &lt;div class="paragraph"&gt;
@@ -249,9 +249,14 @@ i = i + 1;&lt;/code&gt;&lt;/pre&gt;
 &lt;div class="paragraph"&gt;
 &lt;p&gt;A &lt;code&gt;let&lt;/code&gt; statement increases indentation.&lt;/p&gt;
 &lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;&lt;strong&gt;In general, S-expressions introduce more indentation than general C-style language code,
+hence they need more horizontal space.&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr&gt;
 &lt;/div&gt;
 &lt;div class="sect2"&gt;
-&lt;h3 id="_clojure_s_standard_ways_of_dealing_with_deep_nesting_are_tricky"&gt;Clojure&amp;#8217;s standard ways of dealing with deep nesting are tricky&lt;/h3&gt;
+&lt;h3 id="_dealing_with_deep_nesting_is_tricky"&gt;Dealing with deep nesting is tricky&lt;/h3&gt;
 &lt;div class="paragraph"&gt;
 &lt;p&gt;So what does one do when you reach the 80 column limit?&lt;/p&gt;
 &lt;/div&gt;
@@ -269,12 +274,65 @@ doesn&amp;#8217;t free up much space.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;it severely pollutes namespace public symbol pool with functions used
-only at one call-site,
-and naming these functions is generally impossible unless you use really long function names
-that all but ruin any space benefit to using them.&lt;/p&gt;
+only at one call-site&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;naming is a hard problem and naming these functions is generally impossible
+unless you use really long function names that all but ruin any space benefit to using them&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;if the expression uses a lot of local values then the function has very many arguments&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;Another alternative is to break up expressions into let bindings instead of functions.
+This still has a problem with succinct names for similar values:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="listingblock"&gt;
+&lt;div class="content"&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-clojure" data-lang="clojure"&gt;(let [transactions (get-transaction ......
+      transactions-with-confirmed-date (filter ..... transactions)
+      transactions-with-confirmed-date-and-domestic-currency ....]&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;When the expression breaks down into subexpressions which are of type &lt;code&gt;previous value but with slight twist&lt;/code&gt;,
+it becomes really hard to come up with names.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;The only really adequate solution is threading macros, but those don&amp;#8217;t work that well in all situations.&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr&gt;
+&lt;/div&gt;
+&lt;div class="sect2"&gt;
+&lt;h3 id="_the_main_reason_for_this_restriction_in_2019_are_flawed_tools"&gt;The main reason for this restriction in 2019 are flawed tools&lt;/h3&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;The main reason why we have people advocating for this limit in 2019 is that some
+people work in Emacs on a single laptop monitor, and then they split that single monitor down
+into multiple text buffers, which end up being really small so 80 character limit is needed by them.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;I work with multiple large monitors and most of my screen is empty in these codebases.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;But why does the industry need to adjust to the lowest common denominator? Imagine professional photographers
+adjusting everything to work with the smallest lenses because there are people who use that.&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="sect1"&gt;
+&lt;h2 id="_conclusion"&gt;Conclusion&lt;/h2&gt;
+&lt;div class="sectionbody"&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;I know styling is a very personal topic, but at least on Java projects I could download the style of the client
+and have the IDE format the file on each save. I cannot do that in Clojure because this style is not lintable at all,
+so now everyone on the team spends time code reviewing, fixing, rebasing branches for style mistakes.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;It&amp;#8217;s not very smart.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description><pubDate>Tue, 15 Oct 2019 00:00:00 +0200</pubDate></item></channel></rss>
